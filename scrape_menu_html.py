@@ -14,13 +14,15 @@ driver = webdriver.Chrome(options=options)
 
 try:
     driver.get("https://gluseller.com/menu/2025/4/24/105/show")
-    time.sleep(5)  # ページのJS描画を待機
+    time.sleep(5)
 
-    # 明示的に「モーダルが表示される」まで待機
+    **print("==== ページ全体HTML ====")**
+    **print(driver.page_source)**
+    **print("==== ここまで ====")**
+
     modal = WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.CLASS_NAME, "modal-content"))
     )
-
     print("==== モーダル内HTML構造 ====")
     print(modal.get_attribute("innerHTML"))
     print("==== ここまで ====")
