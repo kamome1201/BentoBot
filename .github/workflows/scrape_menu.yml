@@ -1,0 +1,34 @@
+name: Daily Obento Menu Scraper
+
+on:
+#  schedule:
+#    - cron: '0 0 * * 1-5'  # JST 9:00（UTC 0:00）平日
+  workflow_dispatch:  # 手動でも実行可能
+
+jobs:
+  run-scraper:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          sudo apt-get update
+          sudo apt-get install -y chromium-driver
+
+      - name: Run scraper
+        run: python scrape_menu.py
+
+      - name: Upload menu_list.csv as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: menu_list
+          path: menu_list.csv
