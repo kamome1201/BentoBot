@@ -20,7 +20,7 @@ try:
     print(driver.page_source)
     print("==== ここまで ====")
 
-    modal = WebDriverWait(driver, 10).until(
+    modal = WebDriverWait(driver, 20).until(
         EC.presence_of_element_located((By.CLASS_NAME, "modal-content"))
     )
     print("==== モーダル内HTML構造 ====")
