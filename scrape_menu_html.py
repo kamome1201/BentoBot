@@ -14,7 +14,7 @@ driver = webdriver.Chrome(options=options)
 
 try:
     driver.get("https://gluseller.com/menu/2025/4/24/105/show")
-    time.sleep(5)
+    time.sleep(10)
 
     print("==== ページ全体HTML ====")
     print(driver.page_source)
