@@ -18,15 +18,23 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Install dependencies
+      - name: Install Chrome & ChromeDriver
         run: |
-          pip install -r requirements.txt
           sudo apt-get update
-          sudo apt-get install -y wget unzip
-          sudo wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo apt-get install -y wget curl unzip xvfb jq
+          
+          # Install Google Chrome
+          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
           sudo apt install -y ./google-chrome-stable_current_amd64.deb
-          sudo apt-get install -y chromium-chromedriver
-          sudo ln -s /usr/lib/chromium-browser/chromedriver /usr/bin/chromedriver || true
+
+          # Install ChromeDriver matching version
+          CHROME_VERSION=$(google-chrome --version | grep -oP '[0-9.]+' | head -1)
+          CHROMEDRIVER_VERSION=$(curl -sS "https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json" | jq -r --arg v "$CHROME_VERSION" '.channels.Stable.downloads.chromedriver[] | select(.platform == "linux64") | .url')
+          wget -O chromedriver.zip "$CHROMEDRIVER_VERSION"
+          unzip chromedriver.zip
+          sudo mv chromedriver /usr/bin/chromedriver
+          sudo chmod +x /usr/bin/chromedriver
+
 
       - name: Run scraper
         run: python scrape_menu.py
