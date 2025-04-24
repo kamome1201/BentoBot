@@ -32,7 +32,7 @@ jobs:
           CHROMEDRIVER_VERSION=$(curl -sS "https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json" | jq -r --arg v "$CHROME_VERSION" '.channels.Stable.downloads.chromedriver[] | select(.platform == "linux64") | .url')
           wget -O chromedriver.zip "$CHROMEDRIVER_VERSION"
           unzip chromedriver.zip
-          sudo mv chromedriver /usr/bin/chromedriver
+          sudo mv chromedriver-linux64/chromedriver /usr/bin/chromedriver
           sudo chmod +x /usr/bin/chromedriver
 
 
