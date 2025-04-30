@@ -1,22 +1,49 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
+import time
+import json
 import requests
+import os
 
-# GAS WebアプリのURL（あなたのデプロイURLに差し替えてください）
-GAS_URL = "https://script.google.com/a/macros/nig.ac.jp/s/AKfycbwyJ4NiCV8rKNPk1AtAEhplN2ywofLrZM79062-NKRJTXoTGgarPHUw1A4PwK3igQ/exec"
+# GASのURLを環境変数から取得
+GAS_URL = os.getenv("GAS_URL")
+if not GAS_URL:
+    raise ValueError("GAS_URL is not set")
 
-# スクレイピングして得られたメニュー情報の例
-menu_data = [
-    {"name": "ヘルシー弁当", "price": 450},
-    {"name": "デラックス弁当", "price": 550},
-    {"name": "贅沢弁当", "price": 750},
-]
+# ヘッドレスChrome設定
+options = Options()
+options.add_argument('--headless')
+options.add_argument('--no-sandbox')
+options.add_argument('--disable-dev-shm-usage')
+options.binary_location = "/usr/bin/google-chrome"
 
-# GASにPOSTで送信
-response = requests.post(GAS_URL, json=menu_data)
+# ChromeDriver起動
+driver = webdriver.Chrome(options=options)
 
-# 結果確認
-if response.status_code == 200:
-    print("送信成功")
-    print(response.text)
-else:
-    print(f"送信失敗: {response.status_code}")
-    print(response.text)
+try:
+    driver.get("https://gluseller.com/order/table")
+    time.sleep(10)  # ログインを要さないようにする
+
+    # 商品名や価格を含むdivを取得
+    items = driver.find_elements(By.CLASS_NAME, "table_menu_item")
+
+    menu_data = []
+    for item in items:
+        try:
+            name = item.find_element(By.CLASS_NAME, "table_menu_name").text.strip()
+            price = item.find_element(By.CLASS_NAME, "table_menu_price").text.strip()
+            menu_data.append({"name": name, "price": price})
+        except Exception as e:
+            continue  # skip if any field is missing
+
+    print("== 取得したメニュー一覧 ==")
+    print(json.dumps(menu_data, ensure_ascii=False, indent=2))
+
+    # GAS へ POST
+    response = requests.post(GAS_URL, json=menu_data)
+    response.raise_for_status()
+    print("== GAS へ送信成功 ==")
+
+finally:
+    driver.quit()
