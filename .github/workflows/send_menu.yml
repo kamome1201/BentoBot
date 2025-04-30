@@ -2,12 +2,15 @@ name: Send Bento Menu to GAS
 
 on:
   schedule:
-    - cron: '0 0 * * 1-5'  # 平日JST 9:00 (UTC 0:00)
-  workflow_dispatch:       # 手動実行も可能にする
+    - cron: '0 0 * * 1-5'  # 平日 JST 9:00（UTC 0:00）
+  workflow_dispatch:       # 手動実行も可能
 
 jobs:
   run-script:
     runs-on: ubuntu-latest
+
+    env:
+      GAS_URL: ${{ secrets.GAS_URL }}
 
     steps:
       - name: Checkout repo
@@ -22,5 +25,7 @@ jobs:
         run: |
           pip install -r requirements.txt
 
-      - name: Run script to send menu
-        run: python send_menu_to_gas.py
+      - name: Install Chrome & Chromedriver
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget curl unzip xvfb jq
