@@ -33,4 +33,4 @@ jobs:
           sudo chmod +x /usr/bin/chromedriver
 
       - name: Run scraper
-        run: python scrape_menu_html.py
+        run: python fetch_menu.py
