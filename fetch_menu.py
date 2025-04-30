@@ -8,6 +8,7 @@ import os
 import json
 from dotenv import load_dotenv
 import time
+import platform
 
 load_dotenv()
 EMAIL = os.getenv("BENTO_EMAIL")
@@ -15,7 +16,12 @@ PASSWORD = os.getenv("BENTO_PASSWORD")
 
 options = Options()
 options.add_argument("--headless")
-options.binary_location = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+options.add_argument("--no-sandbox")
+options.add_argument("--disable-dev-shm-usage")
+
+# MacのみChromeパスを指定（Linuxでは不要）
+if platform.system() == "Darwin":
+    options.binary_location = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 
 driver = webdriver.Chrome(options=options)
 
@@ -32,7 +38,7 @@ try:
     driver.get("https://gluseller.com/#top_order")
     time.sleep(5)
 
-    # 商品一覧取得（ページ右側の「注文一覧」にあるメニュー名と個数）
+    # 商品一覧取得（右側の「注文一覧」）
     items = driver.find_elements(By.CSS_SELECTOR, ".past_total_wrap dt")
     prices = driver.find_elements(By.CSS_SELECTOR, ".past_total_wrap dd")
 
