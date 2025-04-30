@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>今日の弁当メニュー</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 2em;
+      background: #f8f8f8;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 600px;
+      margin: auto;
+      background: #fff;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background-color: #f0f0f0;
+    }
+    caption {
+      margin-bottom: 1em;
+      font-size: 1.5em;
+    }
+  </style>
+</head>
+<body>
+  <table id="menu-table">
+    <caption>🍱 今日のメニュー</caption>
+    <thead>
+      <tr><th>日付</th><th>商品名</th><th>価格</th></tr>
+    </thead>
+    <tbody>
+      <tr><td colspan="3">読み込み中...</td></tr>
+    </tbody>
+  </table>
+
+  <script>
+    fetch("menu_today.json")
+      .then(response => response.json())
+      .then(data => {
+        const tbody = document.querySelector("#menu-table tbody");
+        tbody.innerHTML = "";
+        data.forEach(row => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `<td>${row.date}</td><td>${row.name}</td><td>${row.price}</td>`;
+          tbody.appendChild(tr);
+        });
+      })
+      .catch(err => {
+        document.querySelector("#menu-table tbody").innerHTML = 
+          `<tr><td colspan="3">メニューの読み込みに失敗しました</td></tr>`;
+        console.error("読み込みエラー:", err);
+      });
+  </script>
+</body>
+</html>
