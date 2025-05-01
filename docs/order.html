@@ -19,6 +19,7 @@
     }
     label {
       display: block;
+      margin-top: 1em;
     }
     input[type="number"] {
       width: 50px;
@@ -36,6 +37,9 @@
       <p>メニュー読み込み中...</p>
     </div>
     <hr>
+    <label>注文日:
+      <select id="order-date"></select>
+    </label>
     <label>お名前: <input type="text" id="user-name" required></label>
     <label>GitHub Personal Access Token: <input type="password" id="token" required></label>
     <button type="submit">注文をGitHub Issueに送信</button>
@@ -48,6 +52,24 @@
   <script>
     const repo = "kamome1201/BentoBot";
     const apiUrl = `https://api.github.com/repos/${repo}/issues`;
+
+    // 注文日 select の生成
+    const dateSelect = document.getElementById("order-date");
+    const today = new Date();
+    for (let i = 0; i < 7; i++) {
+      const d = new Date(today);
+      d.setDate(today.getDate() + i);
+      const yyyy = d.getFullYear();
+      const mm = String(d.getMonth() + 1).padStart(2, '0');
+      const dd = String(d.getDate()).padStart(2, '0');
+      const wday = ['日', '月', '火', '水', '木', '金', '土'][d.getDay()];
+      const val = `${yyyy}-${mm}-${dd}`;
+      const label = `${mm}/${dd} (${wday})`;
+      const opt = document.createElement("option");
+      opt.value = val;
+      opt.textContent = label;
+      dateSelect.appendChild(opt);
+    }
 
     // メニュー読み込み
     fetch("menu_today.json")
@@ -74,6 +96,7 @@
       e.preventDefault();
       const name = document.getElementById("user-name").value;
       const token = document.getElementById("token").value;
+      const orderDate = document.getElementById("order-date").value;
       const checked = Array.from(document.querySelectorAll("input[name='menu']:checked"));
 
       if (!checked.length) {
@@ -81,7 +104,7 @@
         return;
       }
 
-      let body = `【注文者】 ${name}\n\n【注文内容】\n`;
+      let body = `【注文者】 ${name}\n【注文日】 ${orderDate}\n\n【注文内容】\n`;
       checked.forEach((item, i) => {
         const quantity = document.querySelector(`input[name='count-${i}']`).value || 1;
         body += `- ${item.value} × ${quantity}\n`;
