@@ -8,6 +8,9 @@ on:
 jobs:
   fetch-calendar:
     runs-on: ubuntu-latest
+    env:
+      BENTO_EMAIL: ${{ secrets.BENTO_EMAIL }}
+      BENTO_PASSWORD: ${{ secrets.BENTO_PASSWORD }}
 
     steps:
       - name: Checkout repository
