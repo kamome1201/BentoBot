@@ -56,20 +56,36 @@
     // 注文日 select の生成
     const dateSelect = document.getElementById("order-date");
     const today = new Date();
-    for (let i = 0; i < 7; i++) {
-      const d = new Date(today);
-      d.setDate(today.getDate() + i);
-      const yyyy = d.getFullYear();
-      const mm = String(d.getMonth() + 1).padStart(2, '0');
-      const dd = String(d.getDate()).padStart(2, '0');
-      const wday = ['日', '月', '火', '水', '木', '金', '土'][d.getDay()];
-      const val = `${yyyy}-${mm}-${dd}`;
-      const label = `${mm}/${dd} (${wday})`;
-      const opt = document.createElement("option");
-      opt.value = val;
-      opt.textContent = label;
-      dateSelect.appendChild(opt);
-    }
+    const dateSelect = document.getElementById("order-date");
+    const today = new Date();
+    
+    Promise.all([
+      fetch("calendar_status.json").then(res => res.json()),
+    ])
+    .then(([calendarStatus]) => {
+      for (let i = 0; i < 30; i++) {
+        const d = new Date(today);
+        d.setDate(today.getDate() + i);
+        const yyyy = d.getFullYear();
+        const mm = String(d.getMonth() + 1).padStart(2, '0');
+        const dd = String(d.getDate()).padStart(2, '0');
+        const wday = ['日', '月', '火', '水', '木', '金', '土'][d.getDay()];
+        const val = `${yyyy}-${mm}-${dd}`;
+        const label = `${mm}/${dd} (${wday})`;
+    
+        const status = calendarStatus[val] || "normal";
+        let emoji = "";
+        if (status === "holiday") emoji = "（休業日）";
+        if (status === "premium") emoji = " プレミアムデー🍱";
+        if (status === "special") emoji = " スペシャルデー🎯";
+    
+        const opt = document.createElement("option");
+        opt.value = val;
+        opt.textContent = label + emoji;
+        if (status === "holiday") opt.disabled = true;
+        dateSelect.appendChild(opt);
+      }
+    });
 
     // メニュー読み込み
     fetch("menu_today.json")
