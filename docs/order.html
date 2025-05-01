@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>お弁当注文フォーム</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 2em;
+      max-width: 700px;
+      margin: auto;
+    }
+    h1 {
+      font-size: 1.5em;
+      margin-bottom: 1em;
+    }
+    .menu-item {
+      margin-bottom: 0.5em;
+    }
+    label {
+      display: block;
+    }
+    input[type="number"] {
+      width: 50px;
+    }
+    .note {
+      font-size: 0.9em;
+      color: gray;
+    }
+  </style>
+</head>
+<body>
+  <h1>🍜 お弁当注文フォーム</h1>
+  <form id="order-form">
+    <div id="menu-container">
+      <p>メニュー読み込み中...</p>
+    </div>
+    <hr>
+    <label>お名前: <input type="text" id="user-name" required></label>
+    <label>GitHub Personal Access Token: <input type="password" id="token" required></label>
+    <button type="submit">注文をGitHub Issueに送信</button>
+    <p class="note">
+      ※ Tokenは本ページ上には保存されません。
+      利用後は削除することをお勧めします。
+    </p>
+  </form>
+
+  <script>
+    const repo = "kamome1201/BentoBot";
+    const apiUrl = `https://api.github.com/repos/${repo}/issues`;
+
+    // メニュー読み込み
+    fetch("menu_today.json")
+      .then(res => res.json())
+      .then(data => {
+        const menu = data.filter(item => item.name && item.price);
+        const container = document.getElementById("menu-container");
+        container.innerHTML = "";
+        menu.forEach((item, index) => {
+          const div = document.createElement("div");
+          div.className = "menu-item";
+          div.innerHTML = `
+            <label>
+              <input type="checkbox" name="menu" value="${item.name}" data-price="${item.price}">
+              ${item.name}（${item.price}）
+              数量: <input type="number" name="count-${index}" value="1" min="1">
+            </label>
+          `;
+          container.appendChild(div);
+        });
+      });
+
+    document.getElementById("order-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const name = document.getElementById("user-name").value;
+      const token = document.getElementById("token").value;
+      const checked = Array.from(document.querySelectorAll("input[name='menu']:checked"));
+
+      if (!checked.length) {
+        alert("注文商品を選択してください");
+        return;
+      }
+
+      let body = `【注文者】 ${name}\n\n【注文内容】\n`;
+      checked.forEach((item, i) => {
+        const quantity = document.querySelector(`input[name='count-${i}']`).value || 1;
+        body += `- ${item.value} × ${quantity}\n`;
+      });
+
+      const res = await fetch(apiUrl, {
+        method: "POST",
+        headers: {
+          "Authorization": `token ${token}`,
+          "Accept": "application/vnd.github+json"
+        },
+        body: JSON.stringify({
+          title: `お弁当注文 - ${name}`,
+          body,
+          labels: ["bento-order"]
+        })
+      });
+
+      if (res.ok) {
+        alert("注文を受付けました！GitHub Issues をご確認ください");
+        document.getElementById("order-form").reset();
+      } else {
+        alert("注文失敗。Tokenが不正か、もしくは利用権が足りない可能性があります");
+      }
+    });
+  </script>
+</body>
+</html>
