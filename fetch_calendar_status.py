@@ -69,4 +69,23 @@ try:
             class_attr = cell.get_attribute("class")
             cell_text = cell.text
 
-            if "calendar-holiday" in class_attr o_
+            if "calendar-holiday" in class_attr or "休業日" in cell_text:
+                status_map[date] = "holiday"
+            elif "calendar-premium" in class_attr:
+                status_map[date] = "premium"
+            elif "calendar-special" in class_attr:
+                status_map[date] = "special"
+        except Exception as e:
+            print(f"⚠️ セル処理スキップ: {e}")
+            continue
+
+    # 書き出し先ディレクトリ作成
+    os.makedirs("docs", exist_ok=True)
+
+    with open("docs/calendar_status.json", "w", encoding="utf-8") as f:
+        json.dump(status_map, f, ensure_ascii=False, indent=2)
+
+    print(f"✅ calendar_status.json を保存しました（{len(status_map)} 件）")
+
+finally:
+    driver.quit()
