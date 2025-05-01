@@ -1,10 +1,10 @@
 name: BentoBot Auto Order Workflow
 
 on:
-  schedule:
-    - cron: '0 23 * * *'      # JST 08:00 - メニューとカレンダー取得
-    - cron: '55 23 * * *'     # JST 08:55 - 自動注文
-    - cron: '10 0 * * *'      # JST 09:10 - 前日の注文Issueをクローズ
+#  schedule:
+#    - cron: '0 23 * * *'      # JST 08:00 - メニューとカレンダー取得
+#    - cron: '55 23 * * *'     # JST 08:55 - 自動注文
+#    - cron: '10 0 * * *'      # JST 09:10 - 前日の注文Issueをクローズ
   workflow_dispatch:
     inputs:
       target:
