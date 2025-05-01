@@ -23,18 +23,17 @@ options.add_argument("--disable-dev-shm-usage")
 driver = webdriver.Chrome(options=options)
 
 try:
-    # ログイン
-    driver.get("https://gluseller.com/login")
-    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, "email")))
-    driver.find_element(By.NAME, "email").send_keys(EMAIL)
-    driver.find_element(By.NAME, "password").send_keys(PASSWORD)
+    # ログイン処理後
     driver.find_element(By.TAG_NAME, "button").click()
-    time.sleep(2)
-
-    # 注文ページへ遷移
+    WebDriverWait(driver, 15).until(
+        EC.presence_of_element_located((By.CSS_SELECTOR, ".page_contents"))
+    )
+    
+    # 注文ページに遷移（任意、または省略）
     driver.get("https://gluseller.com/#top_order")
-    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "post_total_wrap")))
-    time.sleep(2)
+    WebDriverWait(driver, 15).until(
+        EC.presence_of_element_located((By.CSS_SELECTOR, ".post_total_wrap dt"))
+    )
 
     # メニュー抽出
     today_str = datetime.now().strftime("%Y-%m-%d")
