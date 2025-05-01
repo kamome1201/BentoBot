@@ -1,242 +1,242 @@
 [
   {
-    "type": "past_order",
-    "name": "ヘルシー弁当",
-    "count": "0個",
+    "type": "popup_menu",
+    "name": "",
+    "price": "",
     "date": "2025-05-01"
   },
   {
-    "type": "past_order",
-    "name": "ヘルシー弁当　　白米",
-    "count": "0個",
+    "type": "popup_menu",
+    "name": "",
+    "price": "",
     "date": "2025-05-01"
   },
   {
-    "type": "past_order",
-    "name": "デラックス弁当",
-    "count": "1個",
+    "type": "popup_menu",
+    "name": "",
+    "price": "",
     "date": "2025-05-01"
   },
   {
-    "type": "past_order",
-    "name": "デラックス弁当　　大盛",
-    "count": "1個",
+    "type": "popup_menu",
+    "name": "",
+    "price": "",
     "date": "2025-05-01"
   },
   {
-    "type": "past_order",
-    "name": "デラックス弁当　　白米",
-    "count": "0個",
+    "type": "popup_menu",
+    "name": "",
+    "price": "",
     "date": "2025-05-01"
   },
   {
-    "type": "past_order",
-    "name": "デラックス弁当　　白米大盛",
-    "count": "0個",
+    "type": "popup_menu",
+    "name": "",
+    "price": "",
     "date": "2025-05-01"
   },
   {
-    "type": "past_order",
-    "name": "贅沢弁当",
-    "count": "0個",
+    "type": "popup_menu",
+    "name": "",
+    "price": "",
     "date": "2025-05-01"
   },
   {
-    "type": "past_order",
-    "name": "贅沢弁当　　大盛",
-    "count": "0個",
+    "type": "popup_menu",
+    "name": "",
+    "price": "",
     "date": "2025-05-01"
   },
   {
-    "type": "past_order",
-    "name": "贅沢弁当　　白米",
-    "count": "0個",
+    "type": "popup_menu",
+    "name": "",
+    "price": "",
     "date": "2025-05-01"
   },
   {
-    "type": "past_order",
-    "name": "贅沢弁当　　白米大盛",
-    "count": "0個",
+    "type": "popup_menu",
+    "name": "",
+    "price": "",
     "date": "2025-05-01"
   },
   {
-    "type": "past_order",
-    "name": "唐揚げ弁当(5個入)",
-    "count": "0個",
+    "type": "popup_menu",
+    "name": "",
+    "price": "",
     "date": "2025-05-01"
   },
   {
-    "type": "past_order",
-    "name": "唐揚げ弁当(5個入)　　大盛",
-    "count": "0個",
+    "type": "popup_menu",
+    "name": "",
+    "price": "",
     "date": "2025-05-01"
   },
   {
-    "type": "past_order",
+    "type": "popup_menu",
     "name": "唐揚げ弁当(5個入)　　白米",
-    "count": "0個",
+    "price": "600円",
     "date": "2025-05-01"
   },
   {
-    "type": "past_order",
+    "type": "popup_menu",
     "name": "唐揚げ弁当(5個入)　　白米大盛",
-    "count": "0個",
+    "price": "650円",
     "date": "2025-05-01"
   },
   {
-    "type": "past_order",
+    "type": "popup_menu",
     "name": "唐揚げ南蛮弁当(5個入り)",
-    "count": "0個",
+    "price": "700円",
     "date": "2025-05-01"
   },
   {
-    "type": "past_order",
+    "type": "popup_menu",
     "name": "唐揚げ南蛮弁当(5個入り)　　大盛",
-    "count": "0個",
+    "price": "750円",
     "date": "2025-05-01"
   },
   {
-    "type": "past_order",
+    "type": "popup_menu",
     "name": "唐揚げ南蛮弁当(5個入り)　　白米",
-    "count": "0個",
+    "price": "700円",
     "date": "2025-05-01"
   },
   {
-    "type": "past_order",
+    "type": "popup_menu",
     "name": "唐揚げ南蛮弁当(5個入り)　　白米大盛",
-    "count": "0個",
+    "price": "750円",
     "date": "2025-05-01"
   },
   {
-    "type": "past_order",
+    "type": "popup_menu",
     "name": "TOKYO BLACK プレーンカレー　　白米",
-    "count": "0個",
+    "price": "600円",
     "date": "2025-05-01"
   },
   {
-    "type": "past_order",
+    "type": "popup_menu",
     "name": "TOKYO BLACK プレーンカレー　　白米大盛",
-    "count": "0個",
+    "price": "650円",
     "date": "2025-05-01"
   },
   {
-    "type": "past_order",
+    "type": "popup_menu",
     "name": "TOKYO BLACK プレーンカレー　雑穀米",
-    "count": "0個",
+    "price": "600円",
     "date": "2025-05-01"
   },
   {
-    "type": "past_order",
+    "type": "popup_menu",
     "name": "TOKYO BLACK プレーンカレー　雑穀米　大盛",
-    "count": "0個",
+    "price": "650円",
     "date": "2025-05-01"
   },
   {
-    "type": "past_order",
+    "type": "popup_menu",
     "name": "熟成とんかつカレー　　白米",
-    "count": "0個",
+    "price": "800円",
     "date": "2025-05-01"
   },
   {
-    "type": "past_order",
+    "type": "popup_menu",
     "name": "熟成とんかつカレー　　白米大盛",
-    "count": "0個",
+    "price": "850円",
     "date": "2025-05-01"
   },
   {
-    "type": "past_order",
+    "type": "popup_menu",
     "name": "熟成とんかつカレー　雑穀米",
-    "count": "0個",
+    "price": "800円",
     "date": "2025-05-01"
   },
   {
-    "type": "past_order",
+    "type": "popup_menu",
     "name": "熟成とんかつカレー　雑穀米　大盛",
-    "count": "0個",
+    "price": "850円",
     "date": "2025-05-01"
   },
   {
-    "type": "past_order",
+    "type": "popup_menu",
     "name": "おまかせフライ弁当",
-    "count": "0個",
+    "price": "550円",
     "date": "2025-05-01"
   },
   {
-    "type": "past_order",
+    "type": "popup_menu",
     "name": "おまかせフライ弁当　　大盛",
-    "count": "0個",
+    "price": "600円",
     "date": "2025-05-01"
   },
   {
-    "type": "past_order",
+    "type": "popup_menu",
     "name": "おまかせフライ弁当　　白米",
-    "count": "0個",
+    "price": "550円",
     "date": "2025-05-01"
   },
   {
-    "type": "past_order",
+    "type": "popup_menu",
     "name": "とんかつエビフライ弁当",
-    "count": "0個",
+    "price": "600円",
     "date": "2025-05-01"
   },
   {
-    "type": "past_order",
+    "type": "popup_menu",
     "name": "とんかつエビフライ弁当　　大盛",
-    "count": "0個",
+    "price": "650円",
     "date": "2025-05-01"
   },
   {
-    "type": "past_order",
+    "type": "popup_menu",
     "name": "ハンバーグ唐揚げ弁当",
-    "count": "0個",
+    "price": "600円",
     "date": "2025-05-01"
   },
   {
-    "type": "past_order",
+    "type": "popup_menu",
     "name": "ハンバーグ唐揚げ弁当　　大盛",
-    "count": "0個",
+    "price": "650円",
     "date": "2025-05-01"
   },
   {
-    "type": "past_order",
+    "type": "popup_menu",
     "name": "エビフライ唐揚げ弁当",
-    "count": "0個",
+    "price": "600円",
     "date": "2025-05-01"
   },
   {
-    "type": "past_order",
+    "type": "popup_menu",
     "name": "エビフライ唐揚げ弁当　　大盛",
-    "count": "0個",
+    "price": "650円",
     "date": "2025-05-01"
   },
   {
-    "type": "past_order",
+    "type": "popup_menu",
     "name": "あしたかつ弁当",
-    "count": "0個",
+    "price": "600円",
     "date": "2025-05-01"
   },
   {
-    "type": "past_order",
+    "type": "popup_menu",
     "name": "三島コロッケ弁当",
-    "count": "0個",
+    "price": "550円",
     "date": "2025-05-01"
   },
   {
-    "type": "past_order",
+    "type": "popup_menu",
     "name": "味噌汁　5個",
-    "count": "0個",
+    "price": "100円",
     "date": "2025-05-01"
   },
   {
-    "type": "past_order",
+    "type": "popup_menu",
     "name": "ヘルシーチケット21枚綴り",
-    "count": "0個",
+    "price": "9000円",
     "date": "2025-05-01"
   },
   {
-    "type": "past_order",
+    "type": "popup_menu",
     "name": "デラックスチケット21枚綴り",
-    "count": "0個",
+    "price": "11000円",
     "date": "2025-05-01"
   }
 ]
