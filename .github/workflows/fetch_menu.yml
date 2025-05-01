@@ -43,8 +43,9 @@ jobs:
           sudo chmod +x /usr/bin/chromedriver
 
       - name: Run fetch_menu.py
-        run: python fetch_menu.py
-
+        # run: python fetch_menu.py
+        run: python menu_today.py
+        
       - name: Commit and push menu_today.json
         run: |
           git config --global user.name "github-actions"
