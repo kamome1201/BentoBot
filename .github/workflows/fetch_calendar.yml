@@ -20,6 +20,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          pip install selenium python-dotenv
           pip install selenium
           sudo apt update
           sudo apt install -y wget unzip gnupg curl jq
