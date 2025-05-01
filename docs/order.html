@@ -88,7 +88,7 @@
     fetch("menu_today.json")
       .then(res => res.json())
       .then(data => {
-        const menu = data.filter(item => item.name && item.price);
+        const menu = data.filter(item => item.name?.trim() && item.price?.trim());
         const container = document.getElementById("menu-container");
         container.innerHTML = "";
         menu.forEach((item, index) => {
