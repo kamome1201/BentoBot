@@ -1,3 +1,4 @@
+import os
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
@@ -40,8 +41,15 @@ try:
                 status_map[date] = "premium"
             elif "calendar-special" in class_attr:
                 status_map[date] = "special"
-        except:
+        except Exception as e:
+            print("❌ セル解析失敗:", e)
             continue
+
+    # ✅ docs フォルダ作成
+    os.makedirs("docs", exist_ok=True)
+
+    # ✅ 出力確認
+    print("🔍 取得結果:", status_map)
 
     with open("docs/calendar_status.json", "w", encoding="utf-8") as f:
         json.dump(status_map, f, ensure_ascii=False, indent=2)
