@@ -8,6 +8,7 @@ import os
 import json
 from dotenv import load_dotenv
 import time
+from shutil import which
 
 load_dotenv()
 EMAIL = os.getenv("BENTO_EMAIL")
@@ -15,7 +16,7 @@ PASSWORD = os.getenv("BENTO_PASSWORD")
 
 options = Options()
 options.add_argument("--headless")
-options.binary_location = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+options.binary_location = which("google-chrome")  # 自動検出でLinuxでもOK
 
 driver = webdriver.Chrome(options=options)
 
