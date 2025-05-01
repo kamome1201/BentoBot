@@ -89,7 +89,7 @@ try:
         print("🛑 本日の日付セルがクリックできません（休業日か未表示）。")
 
     # 保存
-    with open("menu_today.json", "w", encoding="utf-8") as f:
+    with open("docs/menu_today.json", "w", encoding="utf-8") as f:
         json.dump(menu_list, f, ensure_ascii=False, indent=2)
 
     print("✅ menu_today.json を保存しました（件数:", len(menu_list), "）")
