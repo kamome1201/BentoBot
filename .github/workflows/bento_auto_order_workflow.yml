@@ -1,11 +1,21 @@
 name: BentoBot Auto Order Workflow
 
 on:
-#  schedule:
-#    - cron: '0 23 * * *'      # JST 08:00 - メニューとカレンダー取得
-#    - cron: '55 23 * * *'     # JST 08:55 - 自動注文
-#    - cron: '10 0 * * *'      # JST 09:10 - 前日の注文Issueをクローズ
+  schedule:
+    - cron: '0 23 * * *'      # JST 08:00 - メニューとカレンダー取得
+    - cron: '55 23 * * *'     # JST 08:55 - 自動注文
+    - cron: '10 0 * * *'      # JST 09:10 - 前日の注文Issueをクローズ
   workflow_dispatch:
+    inputs:
+      target:
+        description: 'Which job to run?'
+        required: true
+        default: 'auto-order'
+        type: choice
+        options:
+          - fetch-data
+          - auto-order
+          - close-issues
 
 permissions:
   contents: write
@@ -13,6 +23,8 @@ permissions:
 jobs:
   setup:
     runs-on: ubuntu-latest
+    outputs:
+      proceed: ${{ steps.set.outputs.proceed }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -39,7 +51,7 @@ jobs:
   fetch-data:
     runs-on: ubuntu-latest
     needs: setup
-    if: github.event.schedule == '0 23 * * *'
+    if: github.event_name == 'schedule' && github.event.schedule == '0 23 * * *' || github.event.inputs.target == 'fetch-data'
     env:
       BENTO_EMAIL: ${{ secrets.BENTO_EMAIL }}
       BENTO_PASSWORD: ${{ secrets.BENTO_PASSWORD }}
@@ -62,7 +74,7 @@ jobs:
   auto-order:
     runs-on: ubuntu-latest
     needs: setup
-    if: github.event.schedule == '55 23 * * *'
+    if: github.event_name == 'schedule' && github.event.schedule == '55 23 * * *' || github.event.inputs.target == 'auto-order'
     env:
       BENTO_EMAIL: ${{ secrets.BENTO_EMAIL }}
       BENTO_PASSWORD: ${{ secrets.BENTO_PASSWORD }}
@@ -76,7 +88,7 @@ jobs:
   close-issues:
     runs-on: ubuntu-latest
     needs: setup
-    if: github.event.schedule == '10 0 * * *'
+    if: github.event_name == 'schedule' && github.event.schedule == '10 0 * * *' || github.event.inputs.target == 'close-issues'
     steps:
       - uses: actions/checkout@v4
 
