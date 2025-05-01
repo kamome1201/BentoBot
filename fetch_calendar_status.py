@@ -22,16 +22,21 @@ options.add_argument("--window-size=1280,800")
 driver = webdriver.Chrome(options=options)
 url = "https://gluseller.com/#top_order"
 
-try:
-    print("🌐 ページアクセス中...")
-    driver.get(url)
+print("🌐 ページアクセス中...")
+driver.get(url)
 
-    # quantity 要素が出るまで待機（カレンダー描画確認）
+try:
     WebDriverWait(driver, 20).until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, "div.quantity"))
+        EC.presence_of_element_located((By.CLASS_NAME, "calendar-date-number"))
     )
-    print("✅ カレンダーが表示されました")
-    time.sleep(2)
+    print("✅ calendar-date-number が見つかりました")
+    time.sleep(3)
+except TimeoutException:
+    print("❌ calendar-date-number が見つかりませんでした")
+    print(driver.page_source)
+    driver.save_screenshot("debug.png")
+    driver.quit()
+    raise
 
     # 全 calendar-day セル取得
     cells = driver.find_elements(By.CSS_SELECTOR, "td[class*='calendar-day']")
