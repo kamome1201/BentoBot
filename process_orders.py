@@ -128,6 +128,12 @@ def perform_order(order_info):
             # 通常のクリックからJSベースに変更（headless対応）
             driver.execute_script("arguments[0].click();", order_btn)
             print("✅ 注文を決定ボタンを JavaScript 経由でクリック")
+            
+            # ✅ ページ遷移や確認メッセージを待機（例：3秒程度）
+            time.sleep(3)  # 安定版（ページ内部でajax注文が完了するまでの待機）
+            
+            # 任意で確認画面や成功メッセージをログ出力
+            driver.save_screenshot("final.png")
         
         except TimeoutException:
             print("❌ 注文ボタンがタイムアウトしました")
