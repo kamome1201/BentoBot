@@ -130,8 +130,11 @@ def perform_order(order_info):
             driver.execute_script("arguments[0].click();", order_btn)
             print("✅ 注文を決定ボタンを JavaScript 経由でクリック")
             
-            # ✅ ページ遷移や確認メッセージを待機（例：3秒程度）
-            time.sleep(3)  # 安定版（ページ内部でajax注文が完了するまでの待機）
+            # ✅ 注文完了ページ（update）への遷移を待機
+            WebDriverWait(driver, 10).until(
+                EC.url_contains("/order/update")
+            )
+            print("✅ 注文完了ページに遷移しました")
             
             # 任意で確認画面や成功メッセージをログ出力
             driver.save_screenshot("final.png")
