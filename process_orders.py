@@ -98,8 +98,7 @@ def perform_order(order_info):
         items = driver.find_elements(By.CSS_SELECTOR, "li.unit-item")
         for item in items:
             try:
-                name_el = item.find_element(By.CSS_SELECTOR, "div.listOrder__title > span")
-                bento_name = name_el.text.strip()
+                bento_name = item.find_element(By.CLASS_NAME, "listOrder__title").text.strip()
                 for order in order_info["orders"]:
                     if bento_name == order["name"]:
                         input_el = item.find_element(By.CSS_SELECTOR, "input.input-quantity")
