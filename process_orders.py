@@ -68,8 +68,13 @@ def perform_order(order_info):
         WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, "email")))
         driver.find_element(By.NAME, "email").send_keys(email)
         driver.find_element(By.NAME, "password").send_keys(password)
-        driver.find_element(By.CLASS_NAME, "submit-button").click()
+        driver.find_element(By.CSS_SELECTOR, "button[type='submit']").click()
 
+        # 注文画面へ明示遷移
+        driver.get("https://gluseller.com/#top_order")
+        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "calendar")))
+        print("✅ 注文ページへ遷移しました")
+        
         # 日付選択
         day_number = int(date_str.split("-")[2])
         WebDriverWait(driver, 10).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, "td.calendar-enable")))
