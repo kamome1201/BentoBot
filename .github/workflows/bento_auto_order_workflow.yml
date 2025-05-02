@@ -90,7 +90,16 @@ jobs:
       - name: Install dependencies
         run: |
           pip install selenium python-dotenv requests
-  
+          sudo apt update
+          sudo apt install -y wget unzip gnupg curl jq
+          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo apt install -y ./google-chrome-stable_current_amd64.deb
+          DRIVER_URL=$(curl -sS "https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json" | jq -r '.channels.Stable.downloads.chromedriver[] | select(.platform == "linux64") | .url')
+          wget -O chromedriver.zip "$DRIVER_URL"
+          unzip chromedriver.zip
+          sudo mv chromedriver-linux64/chromedriver /usr/bin/chromedriver
+          sudo chmod +x /usr/bin/chromedriver
+          
       - name: Run automatic ordering
         run: |
           python process_orders.py
