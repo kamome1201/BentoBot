@@ -32,9 +32,20 @@ def parse_issue(issue):
 # Fetch all open issues labeled "bento-order" but not yet "ordered"
 def fetch_pending_issues():
     res = requests.get(f"{ISSUES_URL}?state=open&labels=bento-order", headers=HEADERS)
+    if res.status_code != 200:
+        print(f"❌ GitHub API エラー: {res.status_code} - {res.text}")
+        return []
+
     issues = res.json()
+    if not isinstance(issues, list):
+        print("❌ 想定外のレスポンス形式:", issues)
+        return []
+
     pending = []
     for issue in issues:
+        if not isinstance(issue, dict):
+            print("⚠️ issue が dict でない:", issue)
+            continue
         if not any(label["name"] == "ordered" for label in issue.get("labels", [])):
             parsed = parse_issue(issue)
             if parsed:
