@@ -125,8 +125,9 @@ def perform_order(order_info):
                 print("❌ 注文ボタンが有効になりませんでした。")
                 return False
         
-            order_btn.click()
-            print("✅ 注文を決定ボタンをクリック")
+            # 通常のクリックからJSベースに変更（headless対応）
+            driver.execute_script("arguments[0].click();", order_btn)
+            print("✅ 注文を決定ボタンを JavaScript 経由でクリック")
         
         except TimeoutException:
             print("❌ 注文ボタンがタイムアウトしました")
