@@ -81,11 +81,13 @@ def perform_order(order_info):
         cells = driver.find_elements(By.CSS_SELECTOR, "td.calendar-enable")
         for cell in cells:
             try:
-                if cell.find_element(By.CLASS_NAME, "date-number").text.strip() == str(day_number):
+                span_text = cell.find_element(By.CLASS_NAME, "calendar-date-number").text.strip()
+                print(f"検査中: {span_text}")
+                if span_text == str(day_number):
                     cell.click()
                     print(f"✅ {day_number}日 を選択")
                     break
-            except:
+            except Exception as e:
                 continue
         else:
             print("❌ 日付クリック失敗")
