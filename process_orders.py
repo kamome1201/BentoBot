@@ -11,7 +11,7 @@ GITHUB_TOKEN = os.getenv("GH_TOKEN")
 REPO = "kamome1201/BentoBot"
 ISSUES_URL = f"https://api.github.com/repos/{REPO}/issues"
 HEADERS = {
-    "Authorization": f"Bearer {GITHUB_TOKEN}",
+    "Authorization": f"token {GITHUB_TOKEN}",
     "Accept": "application/vnd.github+json"
 }
 
