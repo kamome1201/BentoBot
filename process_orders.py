@@ -8,6 +8,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
+from selenium.common.exceptions import TimeoutException
 
 load_dotenv()
 GITHUB_TOKEN = os.getenv("GH_TOKEN")
@@ -111,18 +112,26 @@ def perform_order(order_info):
                 print(f"⚠️ 入力失敗: {e}")
                 continue
 
-        # 注文を決定
-        print("🟡 入力完了、注文ボタンを探します")
-        order_btn = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CLASS_NAME, "cart__submit")))
-        print("🟢 注文ボタンクリック直前")
-        order_btn.click()
-        print("✅ 注文を決定ボタンをクリック")
-
+        # 注文ボタンを明示的に探し、無効なら待機する
+        try:
+            for _ in range(10):  # 最大10秒間確認
+                order_btn = driver.find_element(By.CLASS_NAME, "cart__submit")
+                if order_btn.get_attribute("disabled"):
+                    print("⌛ 注文ボタンがまだ無効、待機中...")
+                    time.sleep(1)
+                else:
+                    break
+            else:
+                print("❌ 注文ボタンが有効になりませんでした。")
+                return False
+        
+            order_btn.click()
+            print("✅ 注文を決定ボタンをクリック")
+        
+        except TimeoutException:
+            print("❌ 注文ボタンがタイムアウトしました")
+            return False
         return True
-
-    except Exception as e:
-        print(f"❌ 注文エラー: {e}")
-        return False
 
     finally:
         driver.quit()
