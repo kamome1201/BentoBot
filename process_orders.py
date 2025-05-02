@@ -7,6 +7,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.keys import Keys
 
 load_dotenv()
 GITHUB_TOKEN = os.getenv("GH_TOKEN")
@@ -104,13 +105,16 @@ def perform_order(order_info):
                         input_el = item.find_element(By.CSS_SELECTOR, "input.input-quantity")
                         input_el.clear()
                         input_el.send_keys(str(order["count"]))
+                        input_el.send_keys(Keys.TAB)  # ← NEW
                         print(f"✅ {bento_name} ← {order['count']}個")
             except Exception as e:
                 print(f"⚠️ 入力失敗: {e}")
                 continue
 
         # 注文を決定
+        print("🟡 入力完了、注文ボタンを探します")
         order_btn = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CLASS_NAME, "cart__submit")))
+        print("🟢 注文ボタンクリック直前")
         order_btn.click()
         print("✅ 注文を決定ボタンをクリック")
 
