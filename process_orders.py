@@ -7,7 +7,7 @@ from datetime import datetime
 
 # Load GitHub token and repo info
 load_dotenv()
-GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
+GITHUB_TOKEN = os.getenv("GH_TOKEN")
 REPO = "kamome1201/BentoBot"
 ISSUES_URL = f"https://api.github.com/repos/{REPO}/issues"
 HEADERS = {
