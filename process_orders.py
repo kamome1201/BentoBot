@@ -5,7 +5,7 @@ import re
 from dotenv import load_dotenv
 from datetime import datetime
 
-if not GITHUB_TOKEN:
+if not GH_TOKEN:
     raise RuntimeError("❌ GH_TOKEN が環境変数として渡されていません")
 
 # Load GitHub token and repo info
