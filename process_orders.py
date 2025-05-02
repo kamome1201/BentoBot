@@ -114,35 +114,32 @@ def perform_order(order_info):
                 continue
 
         # 注文ボタンを明示的に探し、無効なら待機する
-        try:
-            for _ in range(10):  # 最大10秒間確認
-                order_btn = driver.find_element(By.CLASS_NAME, "cart__submit")
-                if order_btn.get_attribute("disabled"):
-                    print("⌛ 注文ボタンがまだ無効、待機中...")
-                    time.sleep(1)
-                else:
-                    break
+        for _ in range(10):  # 最大10秒間確認
+            order_btn = driver.find_element(By.CLASS_NAME, "cart__submit")
+            if order_btn.get_attribute("disabled"):
+                print("⌛ 注文ボタンがまだ無効、待機中...")
+                time.sleep(1)
             else:
-                print("❌ 注文ボタンが有効になりませんでした。")
-                return False
-        
-            # 通常のクリックからJSベースに変更（headless対応）
-            driver.execute_script("arguments[0].click();", order_btn)
-            print("✅ 注文を決定ボタンを JavaScript 経由でクリック")
-            
-            # ✅ 注文完了ページ（update）への遷移を待機
-            WebDriverWait(driver, 10).until(
-                EC.url_contains("/order/update")
-            )
-            print("✅ 注文完了ページに遷移しました")
-            
-            # 任意で確認画面や成功メッセージをログ出力
-            driver.save_screenshot("final.png")
-        
-        except TimeoutException:
-            print("❌ 注文ボタンがタイムアウトしました")
+                break
+        else:
+            print("❌ 注文ボタンが有効になりませんでした。")
             return False
+    
+        # 通常のクリックからJSベースに変更（headless対応）
+        driver.execute_script("arguments[0].click();", order_btn)
+        print("✅ 注文を決定ボタンを JavaScript 経由でクリック")
+        
+        # ✅ 注文完了ページ（update）への遷移を待機
+        WebDriverWait(driver, 10).until(EC.url_contains("/order/update"))
+        print("✅ 注文完了ページに遷移しました")
+        
+        # 任意で確認画面や成功メッセージをログ出力
+        driver.save_screenshot("final.png")
         return True
+        
+    except TimeoutException:
+        print("❌ 注文ボタンがタイムアウトしました")
+        return False
 
     finally:
         driver.quit()
