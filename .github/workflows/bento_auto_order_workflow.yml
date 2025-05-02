@@ -78,6 +78,7 @@ jobs:
     env:
       BENTO_EMAIL: ${{ secrets.BENTO_EMAIL }}
       BENTO_PASSWORD: ${{ secrets.BENTO_PASSWORD }}
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}
     steps:
       - uses: actions/checkout@v4
   
