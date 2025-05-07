@@ -1,242 +1,242 @@
 [
   {
     "type": "popup_menu",
-    "name": "",
-    "price": "",
-    "date": "2025-05-02"
+    "name": "ヘルシー弁当",
+    "price": "450円",
+    "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
-    "name": "",
-    "price": "",
-    "date": "2025-05-02"
+    "name": "ヘルシー弁当  白米",
+    "price": "450円",
+    "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
-    "name": "",
-    "price": "",
-    "date": "2025-05-02"
+    "name": "デラックス弁当",
+    "price": "550円",
+    "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
-    "name": "",
-    "price": "",
-    "date": "2025-05-02"
+    "name": "デラックス弁当  大盛",
+    "price": "600円",
+    "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
-    "name": "",
-    "price": "",
-    "date": "2025-05-02"
+    "name": "デラックス弁当  白米",
+    "price": "550円",
+    "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
-    "name": "",
-    "price": "",
-    "date": "2025-05-02"
+    "name": "デラックス弁当  白米大盛",
+    "price": "600円",
+    "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
-    "name": "",
-    "price": "",
-    "date": "2025-05-02"
+    "name": "デラックス+こだわりの逸品贅沢弁当",
+    "price": "750円",
+    "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
-    "name": "",
-    "price": "",
-    "date": "2025-05-02"
+    "name": "デラックス+こだわりの逸品贅沢弁当  大盛",
+    "price": "800円",
+    "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
-    "name": "",
-    "price": "",
-    "date": "2025-05-02"
+    "name": "デラックス+こだわりの逸品贅沢弁当  白米",
+    "price": "750円",
+    "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
-    "name": "",
-    "price": "",
-    "date": "2025-05-02"
+    "name": "デラックス+こだわりの逸品贅沢弁当  白米大盛",
+    "price": "800円",
+    "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
     "name": "唐揚げ弁当(5個入)",
     "price": "600円",
-    "date": "2025-05-02"
+    "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
-    "name": "唐揚げ弁当(5個入)　　大盛",
+    "name": "唐揚げ弁当(5個入)  大盛",
     "price": "650円",
-    "date": "2025-05-02"
+    "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
-    "name": "唐揚げ弁当(5個入)　　白米",
+    "name": "唐揚げ弁当(5個入)  白米",
     "price": "600円",
-    "date": "2025-05-02"
+    "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
-    "name": "唐揚げ弁当(5個入)　　白米大盛",
+    "name": "唐揚げ弁当(5個入)  白米大盛",
     "price": "650円",
-    "date": "2025-05-02"
+    "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
     "name": "唐揚げ南蛮弁当(5個入り)",
     "price": "700円",
-    "date": "2025-05-02"
+    "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
-    "name": "唐揚げ南蛮弁当(5個入り)　　大盛",
+    "name": "唐揚げ南蛮弁当(5個入り)  大盛",
     "price": "750円",
-    "date": "2025-05-02"
+    "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
-    "name": "唐揚げ南蛮弁当(5個入り)　　白米",
+    "name": "唐揚げ南蛮弁当(5個入り)  白米",
     "price": "700円",
-    "date": "2025-05-02"
+    "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
-    "name": "唐揚げ南蛮弁当(5個入り)　　白米大盛",
+    "name": "唐揚げ南蛮弁当(5個入り)  白米大盛",
     "price": "750円",
-    "date": "2025-05-02"
+    "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
-    "name": "TOKYO BLACK プレーンカレー　　白米",
+    "name": "TOKYO BLACK プレーンカレー  白米",
     "price": "600円",
-    "date": "2025-05-02"
+    "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
-    "name": "TOKYO BLACK プレーンカレー　　白米大盛",
+    "name": "TOKYO BLACK プレーンカレー  白米大盛",
     "price": "650円",
-    "date": "2025-05-02"
+    "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
-    "name": "TOKYO BLACK プレーンカレー　雑穀米",
+    "name": "TOKYO BLACK プレーンカレー 雑穀米",
     "price": "600円",
-    "date": "2025-05-02"
+    "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
-    "name": "TOKYO BLACK プレーンカレー　雑穀米　大盛",
+    "name": "TOKYO BLACK プレーンカレー 雑穀米 大盛",
     "price": "650円",
-    "date": "2025-05-02"
+    "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
-    "name": "熟成とんかつカレー　　白米",
+    "name": "TOKYO BLACK熟成とんかつカレー  白米",
     "price": "800円",
-    "date": "2025-05-02"
+    "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
-    "name": "熟成とんかつカレー　　白米大盛",
+    "name": "TOKYO BLACK熟成とんかつカレー  白米大盛",
     "price": "850円",
-    "date": "2025-05-02"
+    "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
-    "name": "熟成とんかつカレー　雑穀米",
+    "name": "TOKYO BLACK熟成とんかつカレー 雑穀米",
     "price": "800円",
-    "date": "2025-05-02"
+    "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
-    "name": "熟成とんかつカレー　雑穀米　大盛",
+    "name": "TOKYO BLACK熟成とんかつカレー 雑穀米 大盛",
     "price": "850円",
-    "date": "2025-05-02"
+    "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
     "name": "おまかせフライ弁当",
     "price": "550円",
-    "date": "2025-05-02"
+    "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
-    "name": "おまかせフライ弁当　　大盛",
+    "name": "おまかせフライ弁当  大盛",
     "price": "600円",
-    "date": "2025-05-02"
+    "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
-    "name": "おまかせフライ弁当　　白米",
+    "name": "おまかせフライ弁当  白米",
     "price": "550円",
-    "date": "2025-05-02"
+    "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
     "name": "とんかつエビフライ弁当",
     "price": "600円",
-    "date": "2025-05-02"
+    "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
-    "name": "とんかつエビフライ弁当　　大盛",
+    "name": "とんかつエビフライ弁当  大盛",
     "price": "650円",
-    "date": "2025-05-02"
+    "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
     "name": "ハンバーグ唐揚げ弁当",
     "price": "600円",
-    "date": "2025-05-02"
+    "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
-    "name": "ハンバーグ唐揚げ弁当　　大盛",
+    "name": "ハンバーグ唐揚げ弁当  大盛",
     "price": "650円",
-    "date": "2025-05-02"
+    "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
     "name": "エビフライ唐揚げ弁当",
     "price": "600円",
-    "date": "2025-05-02"
+    "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
-    "name": "エビフライ唐揚げ弁当　　大盛",
+    "name": "エビフライ唐揚げ弁当  大盛",
     "price": "650円",
-    "date": "2025-05-02"
+    "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
     "name": "あしたかつ弁当",
     "price": "600円",
-    "date": "2025-05-02"
+    "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
     "name": "三島コロッケ弁当",
     "price": "550円",
-    "date": "2025-05-02"
+    "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
-    "name": "味噌汁　5個",
+    "name": "味噌汁 5個",
     "price": "100円",
-    "date": "2025-05-02"
+    "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
     "name": "ヘルシーチケット21枚綴り",
     "price": "9000円",
-    "date": "2025-05-02"
+    "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
     "name": "デラックスチケット21枚綴り",
     "price": "11000円",
-    "date": "2025-05-02"
+    "date": "2025-05-07"
   }
 ]
