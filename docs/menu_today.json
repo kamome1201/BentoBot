@@ -1,132 +1,73 @@
 [
   {
     "type": "popup_menu",
-<<<<<<< HEAD
     "name": "ヘルシー弁当",
     "price": "450円",
-=======
-    "name": "",
-    "price": "",
->>>>>>> 001e078556457c75643eaafeec272359b3ebbb34
     "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
-<<<<<<< HEAD
     "name": "ヘルシー弁当  白米",
     "price": "450円",
-=======
-    "name": "",
-    "price": "",
->>>>>>> 001e078556457c75643eaafeec272359b3ebbb34
     "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
-<<<<<<< HEAD
     "name": "デラックス弁当",
     "price": "550円",
-=======
-    "name": "",
-    "price": "",
->>>>>>> 001e078556457c75643eaafeec272359b3ebbb34
     "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
-<<<<<<< HEAD
     "name": "デラックス弁当  大盛",
     "price": "600円",
-=======
-    "name": "",
-    "price": "",
->>>>>>> 001e078556457c75643eaafeec272359b3ebbb34
     "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
-<<<<<<< HEAD
     "name": "デラックス弁当  白米",
     "price": "550円",
-=======
-    "name": "",
-    "price": "",
->>>>>>> 001e078556457c75643eaafeec272359b3ebbb34
     "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
-<<<<<<< HEAD
     "name": "デラックス弁当  白米大盛",
     "price": "600円",
-=======
-    "name": "",
-    "price": "",
->>>>>>> 001e078556457c75643eaafeec272359b3ebbb34
     "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
-<<<<<<< HEAD
     "name": "デラックス+こだわりの逸品贅沢弁当",
     "price": "750円",
-=======
-    "name": "",
-    "price": "",
->>>>>>> 001e078556457c75643eaafeec272359b3ebbb34
     "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
-<<<<<<< HEAD
     "name": "デラックス+こだわりの逸品贅沢弁当  大盛",
     "price": "800円",
-=======
-    "name": "",
-    "price": "",
->>>>>>> 001e078556457c75643eaafeec272359b3ebbb34
     "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
-<<<<<<< HEAD
     "name": "デラックス+こだわりの逸品贅沢弁当  白米",
     "price": "750円",
-=======
-    "name": "",
-    "price": "",
->>>>>>> 001e078556457c75643eaafeec272359b3ebbb34
     "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
-<<<<<<< HEAD
     "name": "デラックス+こだわりの逸品贅沢弁当  白米大盛",
     "price": "800円",
-=======
-    "name": "",
-    "price": "",
->>>>>>> 001e078556457c75643eaafeec272359b3ebbb34
     "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
-<<<<<<< HEAD
     "name": "唐揚げ弁当(5個入)",
     "price": "600円",
-=======
-    "name": "",
-    "price": "",
->>>>>>> 001e078556457c75643eaafeec272359b3ebbb34
     "date": "2025-05-07"
   },
   {
     "type": "popup_menu",
-<<<<<<< HEAD
     "name": "唐揚げ弁当(5個入)  大盛",
-=======
-    "name": "",
->>>>>>> 001e078556457c75643eaafeec272359b3ebbb34
     "price": "650円",
     "date": "2025-05-07"
   },
