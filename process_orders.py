@@ -8,8 +8,8 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import TimeoutException
+import unicodedata
 
 load_dotenv()
 GITHUB_TOKEN = os.getenv("GH_TOKEN")
@@ -20,10 +20,16 @@ HEADERS = {
     "Accept": "application/vnd.github+json"
 }
 
+def normalize(text):
+    if not text:
+        return ""
+    text = unicodedata.normalize("NFKC", text)
+    return text.replace("\n", "").replace("　", " ").strip()
+
 def parse_issue(issue):
     body = issue.get("body", "")
     date_match = re.search(r"【注文日】\s*(\d{4}-\d{2}-\d{2})", body)
-    orders = re.findall(r"-\s*(.+?)\s*×\s*(\d+)", body)
+    orders = re.findall(r"-\s*(.+?)\s*\u00d7\s*(\d+)", body)
     if not date_match:
         return None
     return {
@@ -38,13 +44,7 @@ def fetch_pending_issues():
         print(f"❌ GitHub API エラー: {res.status_code} - {res.text}")
         return []
     issues = res.json()
-    pending = []
-    for issue in issues:
-        if not any(label["name"] == "ordered" for label in issue.get("labels", [])):
-            parsed = parse_issue(issue)
-            if parsed:
-                pending.append(parsed)
-    return pending
+    return [parse_issue(issue) for issue in issues if parse_issue(issue) and not any(label["name"] == "ordered" for label in issue.get("labels", []))]
 
 def mark_issue_as_ordered(issue_number):
     url = f"{ISSUES_URL}/{issue_number}"
@@ -58,6 +58,7 @@ def perform_order(order_info):
     email = os.getenv("BENTO_EMAIL")
     password = os.getenv("BENTO_PASSWORD")
     date_str = order_info["date"]
+    day_number = int(date_str.split("-")[2])
 
     options = webdriver.ChromeOptions()
     options.add_argument("--headless")
@@ -66,86 +67,122 @@ def perform_order(order_info):
     driver = webdriver.Chrome(options=options)
 
     try:
-        # ログイン
         driver.get("https://gluseller.com/login")
         WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, "email")))
         driver.find_element(By.NAME, "email").send_keys(email)
         driver.find_element(By.NAME, "password").send_keys(password)
         driver.find_element(By.CSS_SELECTOR, "button[type='submit']").click()
 
-        # 注文画面へ明示遷移
         driver.get("https://gluseller.com/#top_order")
         WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "calendar")))
         print("✅ 注文ページへ遷移しました")
-        
-        # 日付選択
-        day_number = int(date_str.split("-")[2])
+
         WebDriverWait(driver, 10).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, "td.calendar-enable")))
         cells = driver.find_elements(By.CSS_SELECTOR, "td.calendar-enable")
+        target_cell = None
         for cell in cells:
             try:
-                span_text = cell.find_element(By.CLASS_NAME, "calendar-date-number").text.strip()
-                print(f"検査中: {span_text}")
-                if span_text == str(day_number):
-                    cell.click()
-                    print(f"✅ {day_number}日 を選択")
+                if "calendar-holiday" in cell.get_attribute("class") or "calendar-null" in cell.get_attribute("class"):
+                    continue
+                if cell.find_element(By.CLASS_NAME, "calendar-date-number").text.strip() == str(day_number):
+                    target_cell = cell
                     break
-            except Exception as e:
+            except:
                 continue
-        else:
-            print("❌ 日付クリック失敗")
+
+        time.sleep(1)
+        if not target_cell:
+            print(f"❌ {date_str} に対応する注文可能な日付セルが見つかりません。")
             return False
 
-        # 数量入力
-        WebDriverWait(driver, 10).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, "li.unit-item")))
-        items = driver.find_elements(By.CSS_SELECTOR, "li.unit-item")
+        driver.execute_script("arguments[0].click();", target_cell)
+        print(f"✅ {day_number}日 をクリックしました")
+
+        for i, y in enumerate([600, 1200, 1800]):
+            driver.execute_script(f"window.scrollTo(0, {y});")
+            time.sleep(1)
+            driver.save_screenshot(f"debug_after_click_scroll_{i}.png")
+        print("📸 カレンダークリック後の状態をスクロールして撮影しました")
+
+        WebDriverWait(driver, 8).until(EC.presence_of_element_located((By.CLASS_NAME, "modaal-content-container")))
+        print("✅ モーダルが表示されました")
+        time.sleep(2)
+        modal = driver.find_element(By.CLASS_NAME, "modaal-wrapper")
+        items = modal.find_elements(By.CSS_SELECTOR, "li.unit-item")
+
+        if not items:
+            print("⚠️ 商品リストがありません")
+            driver.save_screenshot("debug_no_items_modal.png")
+            return False
+
         for item in items:
             try:
                 bento_name = item.find_element(By.CLASS_NAME, "listOrder__title").text.strip()
+                normalized_bento_name = normalize(bento_name)
+                matched = False
+
                 for order in order_info["orders"]:
-                    if bento_name == order["name"]:
+                    if normalize(order["name"]) == normalized_bento_name:
                         input_el = item.find_element(By.CSS_SELECTOR, "input.input-quantity")
-                        input_el.clear()
-                        input_el.send_keys(str(order["count"]))
-                        input_el.send_keys(Keys.TAB)  # ← NEW
-                        print(f"✅ {bento_name} ← {order['count']}個")
+                        driver.execute_script("""
+                            const input = arguments[0];
+                            input.value = arguments[1];
+                            input.dispatchEvent(new Event('input', { bubbles: true }));
+                            input.dispatchEvent(new Event('change', { bubbles: true }));
+                        """, input_el, str(order["count"]))
+                        print(f"✅ {normalized_bento_name} ← {order['count']}個（入力成功）")
+                        matched = True
+                        time.sleep(2)
+                        break
+
+                if not matched:
+                    print(f"❔ 商品名不一致: 注文='{order['name']}', 表示='{bento_name}'")
             except Exception as e:
                 print(f"⚠️ 入力失敗: {e}")
-                continue
 
-        # 注文ボタンを明示的に探し、無効なら待機する
-        for _ in range(10):  # 最大10秒間確認
-            order_btn = driver.find_element(By.CLASS_NAME, "cart__submit")
-            if order_btn.get_attribute("disabled"):
-                print("⌛ 注文ボタンがまだ無効、待機中...")
-                time.sleep(1)
-            else:
+        order_btn = modal.find_element(By.CLASS_NAME, "cart__submit")
+        for _ in range(10):
+            if not order_btn.get_attribute("disabled"):
                 break
+            time.sleep(1)
         else:
-            print("❌ 注文ボタンが有効になりませんでした。")
+            print("❌ 注文ボタンが有効になりません")
+            driver.save_screenshot("debug_input.png")
             return False
-    
-        # 通常のクリックからJSベースに変更（headless対応）
+
+        driver.save_screenshot("debug_input.png")
         driver.execute_script("arguments[0].click();", order_btn)
-        print("✅ 注文を決定ボタンを JavaScript 経由でクリック")
-        
-        # ✅ 注文完了ページ（update）への遷移を待機
+        print("✅ 注文ボタンをクリックしました")
+        time.sleep(2)
+
         WebDriverWait(driver, 10).until(EC.url_contains("/order/update"))
-        print("✅ 注文完了ページに遷移しました")
-        
-        # 任意で確認画面や成功メッセージをログ出力
+        print("✅ 注文完了ページへ遷移しました")
         driver.save_screenshot("final.png")
+        time.sleep(2)
+
         return True
-        
+
     except TimeoutException:
-        print("❌ 注文ボタンがタイムアウトしました")
+        driver.save_screenshot("debug_input.png")
+        print("📸 debug_input.png を保存しました（タイムアウト）")
         return False
 
     finally:
         driver.quit()
+
+def comment_on_issue(issue_number, message):
+    url = f"{ISSUES_URL}/{issue_number}/comments"
+    res = requests.post(url, headers=HEADERS, json={"body": message})
+    if res.status_code == 201:
+        print(f"📝 Issue #{issue_number} にコメントしました。")
+    else:
+        print(f"❌ コメント失敗: {res.text}")
 
 if __name__ == "__main__":
     issues = fetch_pending_issues()
     for issue in issues:
         if perform_order(issue):
             mark_issue_as_ordered(issue["number"])
+#            comment_on_issue(issue["number"], f"✅ {issue['date']} の注文を受け付けました。")
+#        else:
+#            comment_on_issue(issue["number"], f"❌ {issue['date']} の注文に失敗しました。再確認をお願いします。")
