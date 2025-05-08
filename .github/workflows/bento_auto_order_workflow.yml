@@ -1,7 +1,7 @@
 name: BentoBot Auto Order Workflow
 
 on:
-  schedule:
+  #schedule:
     # JST 9:00 (UTC 0:00) - 明日のメニューとカレンダー取得
     #- cron: '0 0 * * *'  # UTC 0:00 = JST 9:00
     # JST 9:30 (UTC 0:30) - 今日のお弁当の合計を計算
