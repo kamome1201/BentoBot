@@ -1,8 +1,8 @@
 name: Fetch Bento Menu
 
 on:
-  schedule:
-    - cron: '0 0 * * 1-5'  # 平日JST 9:00（UTC 0:00）
+  #schedule:
+  #  - cron: '0 0 * * 1-5'  # 平日JST 9:00（UTC 0:00）
   workflow_dispatch:
 
 permissions:
