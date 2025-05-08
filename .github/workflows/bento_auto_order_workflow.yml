@@ -42,7 +42,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install selenium python-dotenv
+          pip install -r requirements.txt
           sudo apt update
           sudo apt install -y wget unzip gnupg curl jq
           wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
