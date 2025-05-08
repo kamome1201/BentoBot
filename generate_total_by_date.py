@@ -4,6 +4,7 @@ import os
 import re
 from collections import defaultdict
 from dotenv import load_dotenv
+from datetime import datetime
 
 load_dotenv()
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
@@ -19,7 +20,13 @@ def fetch_all_issues():
     issues = []
     page = 1
     while True:
-        res = requests.get(f"{ISSUES_URL}?state=all&labels=bento-order&per_page=100&page={page}", headers=HEADERS)
+        try:
+            res = requests.get(f"{ISSUES_URL}?state=all&labels=bento-order&per_page=100&page={page}", headers=HEADERS, timeout=10)
+            res.raise_for_status()  # もしエラーがあった場合は例外を発生させる
+        except requests.exceptions.RequestException as e:
+            print(f"❌ APIリクエストに失敗しました: {e}")
+            break
+        
         data = res.json()
         if not data:
             break
@@ -40,24 +47,34 @@ def parse_issue(issue):
     }
 
 # Load price map from menu_today.json
-with open("docs/menu_today.json", "r", encoding="utf-8") as f:
+menu_file = "docs/menu_today.json"
+if not os.path.exists(menu_file):
+    print(f"❌ {menu_file} が見つかりません。ファイルが正しい場所にあるか確認してください。")
+    exit(1)
+
+with open(menu_file, "r", encoding="utf-8") as f:
     menu_data = json.load(f)
     price_map = {item["name"]: int(item["price"].replace("円", "")) for item in menu_data if item["name"] and item["price"]}
 
-# Aggregate total price by date
-total_by_date = defaultdict(int)
+# Get today's date in the format YYYY-MM-DD
+today = datetime.utcnow().strftime("%Y-%m-%d")
+
+# Aggregate total price for today's orders
+total_today = 0
 for issue in fetch_all_issues():
     parsed = parse_issue(issue)
     if not parsed:
         continue
-    for order in parsed["orders"]:
-        name = order["name"]
-        count = order["count"]
-        price = price_map.get(name, 0)
-        total_by_date[parsed["date"]] += price * count
+    if parsed["date"] == today:
+        for order in parsed["orders"]:
+            name = order["name"]
+            count = order["count"]
+            price = price_map.get(name, 0)
+            total_today += price * count
 
 # Save result
-with open("docs/total_by_date.json", "w", encoding="utf-8") as f:
-    json.dump(total_by_date, f, ensure_ascii=False, indent=2)
+output_file = "docs/total_today.json"
+with open(output_file, "w", encoding="utf-8") as f:
+    json.dump({"total_today": total_today}, f, ensure_ascii=False, indent=2)
 
-print("✅ total_by_date.json を生成しました")
+print(f"✅ 当日の合計金額を {output_file} に保存しました。")
