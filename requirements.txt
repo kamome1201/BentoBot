@@ -2,7 +2,8 @@ selenium
 pandas
 requests
 python-dotenv
-conda-forge::googletrans
+googletrans
 deep-translator
-chromium-browser
-chromium-chromedriver
+# 以下はOSのパッケージマネージャから
+# chromium-browser
+# chromium-chromedriver
