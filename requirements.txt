@@ -4,6 +4,7 @@ requests
 python-dotenv
 googletrans
 deep-translator
+flask
 # 以下はOSのパッケージマネージャから
 # chromium-browser
 # chromium-chromedriver
