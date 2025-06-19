@@ -1,0 +1,378 @@
+[
+  {
+    "type": "popup_menu",
+    "name": "ヘルシー弁当",
+    "price": "450円",
+    "date": "2025-06-18",
+    "name_en": "Healthy lunch",
+    "price_en": "450 yen"
+  },
+  {
+    "type": "popup_menu",
+    "name": "ヘルシー弁当  白米",
+    "price": "450円",
+    "date": "2025-06-18",
+    "name_en": "Healthy lunch box White rice",
+    "price_en": "450 yen"
+  },
+  {
+    "type": "popup_menu",
+    "name": "デラックス弁当",
+    "price": "550円",
+    "date": "2025-06-18",
+    "name_en": "Deluxe Bento",
+    "price_en": "550 yen"
+  },
+  {
+    "type": "popup_menu",
+    "name": "デラックス弁当  大盛",
+    "price": "600円",
+    "date": "2025-06-18",
+    "name_en": "Deluxe Lunch Box Large",
+    "price_en": "600 yen"
+  },
+  {
+    "type": "popup_menu",
+    "name": "デラックス弁当  白米",
+    "price": "550円",
+    "date": "2025-06-18",
+    "name_en": "Deluxe Bento White Rice",
+    "price_en": "550 yen"
+  },
+  {
+    "type": "popup_menu",
+    "name": "デラックス弁当  白米大盛",
+    "price": "600円",
+    "date": "2025-06-18",
+    "name_en": "Deluxe Bento White Rice Large Format",
+    "price_en": "600 yen"
+  },
+  {
+    "type": "popup_menu",
+    "name": "デラックス+こだわりの逸品贅沢弁当",
+    "price": "750円",
+    "date": "2025-06-18",
+    "name_en": "Deluxe + Specialty Luxury Bento",
+    "price_en": "750 yen"
+  },
+  {
+    "type": "popup_menu",
+    "name": "デラックス+こだわりの逸品贅沢弁当  大盛",
+    "price": "800円",
+    "date": "2025-06-18",
+    "name_en": "Deluxe + Specialty Luxury Lunch Box Large Form",
+    "price_en": "800 yen"
+  },
+  {
+    "type": "popup_menu",
+    "name": "デラックス+こだわりの逸品贅沢弁当  白米",
+    "price": "750円",
+    "date": "2025-06-18",
+    "name_en": "Deluxe + Specially selected luxury lunch box White rice",
+    "price_en": "750 yen"
+  },
+  {
+    "type": "popup_menu",
+    "name": "デラックス+こだわりの逸品贅沢弁当  白米大盛",
+    "price": "800円",
+    "date": "2025-06-18",
+    "name_en": "Deluxe + Specially selected luxury bento with large white rice",
+    "price_en": "800 yen"
+  },
+  {
+    "type": "popup_menu",
+    "name": "冷うどんランチBOX 天ぷら3種",
+    "price": "800円",
+    "date": "2025-06-18",
+    "name_en": "Cold Udon Lunch Box 3 Types of Tempura",
+    "price_en": "800 yen"
+  },
+  {
+    "type": "popup_menu",
+    "name": "冷うどんランチBOX 天ぷら2種",
+    "price": "700円",
+    "date": "2025-06-18",
+    "name_en": "Cold udon lunch box, 2 types of tempura",
+    "price_en": "700 yen"
+  },
+  {
+    "type": "popup_menu",
+    "name": "冷うどんランチBOX 天ぷら1種",
+    "price": "550円",
+    "date": "2025-06-18",
+    "name_en": "Cold Udon Lunch Box, 1 kind of tempura",
+    "price_en": "550 yen"
+  },
+  {
+    "type": "popup_menu",
+    "name": "唐揚げ弁当(5個入)",
+    "price": "600円",
+    "date": "2025-06-18",
+    "name_en": "Fried chicken bento (5 pieces)",
+    "price_en": "600 yen"
+  },
+  {
+    "type": "popup_menu",
+    "name": "唐揚げ弁当(5個入)  大盛",
+    "price": "650円",
+    "date": "2025-06-18",
+    "name_en": "Fried chicken bento (5 pieces) Large portion",
+    "price_en": "650 yen"
+  },
+  {
+    "type": "popup_menu",
+    "name": "唐揚げ弁当(5個入)  白米",
+    "price": "600円",
+    "date": "2025-06-18",
+    "name_en": "Fried chicken bento (5 pieces) White rice",
+    "price_en": "600 yen"
+  },
+  {
+    "type": "popup_menu",
+    "name": "唐揚げ弁当(5個入)  白米大盛",
+    "price": "650円",
+    "date": "2025-06-18",
+    "name_en": "Fried chicken bento (5 pieces) Large white rice",
+    "price_en": "650 yen"
+  },
+  {
+    "type": "popup_menu",
+    "name": "唐揚げ南蛮弁当(5個入り)",
+    "price": "700円",
+    "date": "2025-06-18",
+    "name_en": "Fried chicken nanban bento (5 pieces)",
+    "price_en": "700 yen"
+  },
+  {
+    "type": "popup_menu",
+    "name": "唐揚げ南蛮弁当(5個入り)  大盛",
+    "price": "750円",
+    "date": "2025-06-18",
+    "name_en": "Fried chicken nanban bento (5 pieces) Large portion",
+    "price_en": "750 yen"
+  },
+  {
+    "type": "popup_menu",
+    "name": "唐揚げ南蛮弁当(5個入り)  白米",
+    "price": "700円",
+    "date": "2025-06-18",
+    "name_en": "Fried chicken nanban bento (5 pieces) White rice",
+    "price_en": "700 yen"
+  },
+  {
+    "type": "popup_menu",
+    "name": "唐揚げ南蛮弁当(5個入り)  白米大盛",
+    "price": "750円",
+    "date": "2025-06-18",
+    "name_en": "Fried chicken nanban bento (5 pieces) Large white rice",
+    "price_en": "750 yen"
+  },
+  {
+    "type": "popup_menu",
+    "name": "TOKYO BLACK プレーンカレー  白米",
+    "price": "600円",
+    "date": "2025-06-18",
+    "name_en": "TOKYO BLACK Plain Curry White Rice",
+    "price_en": "600 yen"
+  },
+  {
+    "type": "popup_menu",
+    "name": "TOKYO BLACK プレーンカレー  白米大盛",
+    "price": "650円",
+    "date": "2025-06-18",
+    "name_en": "TOKYO BLACK Plain Curry White Rice Large Form",
+    "price_en": "650 yen"
+  },
+  {
+    "type": "popup_menu",
+    "name": "TOKYO BLACK プレーンカレー 雑穀米",
+    "price": "600円",
+    "date": "2025-06-18",
+    "name_en": "TOKYO BLACK Plain Curry Mixed Grain Rice",
+    "price_en": "600 yen"
+  },
+  {
+    "type": "popup_menu",
+    "name": "TOKYO BLACK プレーンカレー 雑穀米 大盛",
+    "price": "650円",
+    "date": "2025-06-18",
+    "name_en": "TOKYO BLACK Plain Curry Mixed Grain Rice Large Form",
+    "price_en": "650 yen"
+  },
+  {
+    "type": "popup_menu",
+    "name": "TOKYO BLACK熟成とんかつカレー  白米",
+    "price": "800円",
+    "date": "2025-06-18",
+    "name_en": "TOKYO BLACK Aged Tonkatsu Curry White Rice",
+    "price_en": "800 yen"
+  },
+  {
+    "type": "popup_menu",
+    "name": "TOKYO BLACK熟成とんかつカレー  白米大盛",
+    "price": "850円",
+    "date": "2025-06-18",
+    "name_en": "TOKYO BLACK Aged Tonkatsu Curry White Rice Large Size",
+    "price_en": "850 yen"
+  },
+  {
+    "type": "popup_menu",
+    "name": "TOKYO BLACK熟成とんかつカレー 雑穀米",
+    "price": "800円",
+    "date": "2025-06-18",
+    "name_en": "TOKYO BLACK Aged Pork Katsu Curry Multigrain Rice",
+    "price_en": "800 yen"
+  },
+  {
+    "type": "popup_menu",
+    "name": "TOKYO BLACK熟成とんかつカレー 雑穀米 大盛",
+    "price": "850円",
+    "date": "2025-06-18",
+    "name_en": "TOKYO BLACK Aged Pork Katsu Curry Mixed Grain Rice Large Form",
+    "price_en": "850 yen"
+  },
+  {
+    "type": "popup_menu",
+    "name": "おまかせフライ弁当",
+    "price": "550円",
+    "date": "2025-06-18",
+    "name_en": "Omakase Fried Bento",
+    "price_en": "550 yen"
+  },
+  {
+    "type": "popup_menu",
+    "name": "おまかせフライ弁当  大盛",
+    "price": "600円",
+    "date": "2025-06-18",
+    "name_en": "Omakase fried bento Large portion",
+    "price_en": "600 yen"
+  },
+  {
+    "type": "popup_menu",
+    "name": "おまかせフライ弁当  白米",
+    "price": "550円",
+    "date": "2025-06-18",
+    "name_en": "Omakase Fried Bento White Rice",
+    "price_en": "550 yen"
+  },
+  {
+    "type": "popup_menu",
+    "name": "とんかつエビフライ弁当",
+    "price": "600円",
+    "date": "2025-06-18",
+    "name_en": "Fried shrimp bento tonkatsu",
+    "price_en": "600 yen"
+  },
+  {
+    "type": "popup_menu",
+    "name": "とんかつエビフライ弁当  大盛",
+    "price": "650円",
+    "date": "2025-06-18",
+    "name_en": "Fried shrimp bento large portion",
+    "price_en": "650 yen"
+  },
+  {
+    "type": "popup_menu",
+    "name": "ハンバーグ唐揚げ弁当",
+    "price": "600円",
+    "date": "2025-06-18",
+    "name_en": "Hamburger fried chicken bento",
+    "price_en": "600 yen"
+  },
+  {
+    "type": "popup_menu",
+    "name": "ハンバーグ唐揚げ弁当  大盛",
+    "price": "650円",
+    "date": "2025-06-18",
+    "name_en": "Hamburger fried chicken bento large portion",
+    "price_en": "650 yen"
+  },
+  {
+    "type": "popup_menu",
+    "name": "エビフライ唐揚げ弁当",
+    "price": "600円",
+    "date": "2025-06-18",
+    "name_en": "Fried shrimp fried chicken bento",
+    "price_en": "600 yen"
+  },
+  {
+    "type": "popup_menu",
+    "name": "エビフライ唐揚げ弁当  大盛",
+    "price": "650円",
+    "date": "2025-06-18",
+    "name_en": "Fried shrimp fried chicken bento large serving",
+    "price_en": "650 yen"
+  },
+  {
+    "type": "popup_menu",
+    "name": "あしたかつ弁当",
+    "price": "600円",
+    "date": "2025-06-18",
+    "name_en": "Tomorrow's lunch",
+    "price_en": "600 yen"
+  },
+  {
+    "type": "popup_menu",
+    "name": "三島コロッケ弁当",
+    "price": "550円",
+    "date": "2025-06-18",
+    "name_en": "Mishima Croquette Bento",
+    "price_en": "550 yen"
+  },
+  {
+    "type": "popup_menu",
+    "name": "うな重",
+    "price": "1000円",
+    "date": "2025-06-18",
+    "name_en": "Unaju",
+    "price_en": "1000 yen"
+  },
+  {
+    "type": "popup_menu",
+    "name": "味噌汁 5個",
+    "price": "100円",
+    "date": "2025-06-18",
+    "name_en": "5 miso soup",
+    "price_en": "100 yen"
+  },
+  {
+    "type": "popup_menu",
+    "name": "ヘルシーチケット21枚綴り",
+    "price": "9000円",
+    "date": "2025-06-18",
+    "name_en": "21 healthy tickets",
+    "price_en": "9000 yen"
+  },
+  {
+    "type": "popup_menu",
+    "name": "デラックスチケット21枚綴り",
+    "price": "11000円",
+    "date": "2025-06-18",
+    "name_en": "21 deluxe tickets",
+    "price_en": "11000 yen"
+  },
+  {
+    "name": "ひまわり日替わり弁当・太郎",
+    "price": "580円",
+    "type": "fixed_menu",
+    "date": "2025-06-18",
+    "name_en": "Sunflower Daily Bento Taro",
+    "price_en": "580 yen"
+  },
+  {
+    "name": "ひまわり日替わり弁当・花子",
+    "price": "580円",
+    "type": "fixed_menu",
+    "date": "2025-06-18",
+    "name_en": "Sunflower Daily Bento/Hanako",
+    "price_en": "580 yen"
+  },
+  {
+    "name": "ひまわり日替わり弁当・チビ",
+    "price": "480円",
+    "type": "fixed_menu",
+    "date": "2025-06-18",
+    "name_en": "Sunflower Daily Lunch Boxes and Chibi",
+    "price_en": "480 yen"
+  }
+]

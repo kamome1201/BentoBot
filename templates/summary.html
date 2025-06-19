@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>注文・金額一覧（管理者用）</title>
+  <style>
+    body { font-family: sans-serif; max-width: 700px; margin: 2em auto; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { padding: 0.4em 0.7em; border: 1px solid #ccc; }
+    th { background: #eee; }
+    h2 { margin-top: 2em; }
+  </style>
+</head>
+<body>
+  <h1>注文一覧・合計金額（管理者用）</h1>
+  {% for date in sorted_dates %}
+    <h2>{{ date }}</h2>
+    <table>
+      <thead>
+        <tr><th>商品名</th><th>数量</th></tr>
+      </thead>
+      <tbody>
+        {% for order in summary[date]["orders"] %}
+          <tr>
+            <td>{{ order.name }}</td>
+            <td>{{ order.count }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <p><b>合計金額：</b>{{ summary[date]["total"] | int | string | replace(',', ',') }} 円</p>
+    <hr>
+  {% endfor %}
+</body>
+</html>

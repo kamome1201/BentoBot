@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>お弁当注文フォーム / Bento Order Form</title>
+  <style>
+    body { font-family: sans-serif; max-width: 700px; margin: auto; padding: 2em; }
+    h1 { font-size: 1.5em; }
+    .lang-switch { float: right; margin-top: -1em; }
+    .lang-switch button { margin-left: 0.5em; }
+    .menu-block { margin-bottom: 1em; }
+    .menu-item { margin-bottom: 0.5em; }
+    label { display: block; margin-top: 1em; }
+    input[type="number"] { width: 50px; }
+    .section { margin-bottom: 2em; }
+    .disabled { color: #aaa; }
+    .notice { color: #c00; font-weight: bold; }
+    #submit-btn { margin-bottom: 2em; margin-top: 1em; }
+  </style>
+</head>
+<body>
+  <div class="lang-switch">
+    <span id="label-language">言語:</span>
+    <button type="button" onclick="setLang('ja')">日本語</button>
+    <button type="button" onclick="setLang('en')">English</button>
+  </div>
+  <h1 id="title">🍱 お弁当注文フォーム</h1>
+  <form id="order-form">
+    <div class="section">
+      <label id="label-order-date">注文日:
+        <select id="order-date" required></select>
+      </label>
+      <label id="label-your-name">お名前: <input type="text" id="user-name" required></label>
+      <button type="submit" id="submit-btn">注文する</button>
+    </div>
+
+    <div id="himawari-menu" class="menu-block section">
+      <h2 id="label-himawari">🌻 ひまわり（固定メニュー）</h2>
+      <div id="himawari-menu-list">メニュー読み込み中...</div>
+    </div>
+    <div id="izu-menu" class="menu-block section">
+      <h2 id="label-izu">🗻 伊豆・箱根のお弁当（Web取得）</h2>
+      <div id="izu-menu-list">メニュー読み込み中...</div>
+      <div id="izu-menu-notice"></div>
+    </div>
+  </form>
+
+  <script>
+    // 多言語ラベル
+    const LANGS = {
+      ja: {
+        title: "🍱 お弁当注文フォーム",
+        label_language: "言語:",
+        order_date: "注文日:",
+        your_name: "お名前:",
+        himawari: "🌻 ひまわり（固定メニュー）",
+        izu: "🗻 伊豆・箱根のお弁当（Web取得）",
+        loading: "メニュー読み込み中...",
+        fixed_none: "本日は固定メニューがありません。",
+        web_none: "本日はWebメニューがありません。",
+        qty: "数量:",
+        submit: "注文する",
+        holiday_notice: "祝日はWeb取得メニューは注文できません。固定メニューのみ注文可能です。",
+        order_success: "注文を受付けました！担当者からの返信をお待ちください。",
+        order_fail: "注文失敗：",
+        select_menu: "1つ以上メニューを選択してください。",
+        select_fixed: "祝日は固定メニューから1つ以上選択してください。"
+      },
+      en: {
+        title: "🍱 Bento Order Form",
+        label_language: "Language:",
+        order_date: "Order date:",
+        your_name: "Your name:",
+        himawari: "🌻 Himawari (Fixed menu)",
+        izu: "🗻 Izu/Hakone Bento (Web scraped menu)",
+        loading: "Loading menu...",
+        fixed_none: "No fixed menu available today.",
+        web_none: "No web scraped menu available today.",
+        qty: "Qty:",
+        submit: "Submit Order",
+        holiday_notice: "Web scraped menu is not available on holidays. Only fixed menu can be ordered.",
+        order_success: "Your order has been submitted! Please wait for a confirmation from the staff.",
+        order_fail: "Order failed: ",
+        select_menu: "Please select at least one menu item.",
+        select_fixed: "Please select at least one item from the fixed menu (Himawari) for holidays."
+      }
+    };
+
+    let currentLang = "ja";
+    let calendarStatus = {};
+    let himawariMenu = [];
+    let izuMenu = [];
+
+    function setLang(lang) {
+      currentLang = lang;
+      document.getElementById("title").textContent = LANGS[lang].title;
+      document.getElementById("label-language").textContent = LANGS[lang].label_language;
+      document.getElementById("label-order-date").childNodes[0].nodeValue = LANGS[lang].order_date;
+      document.getElementById("label-your-name").childNodes[0].nodeValue = LANGS[lang].your_name;
+      document.getElementById("label-himawari").textContent = LANGS[lang].himawari;
+      document.getElementById("label-izu").textContent = LANGS[lang].izu;
+      document.getElementById("submit-btn").textContent = LANGS[lang].submit;
+      showMenus();
+      updateMenuEnable();
+    }
+
+    // 日付
+    fetch("/static/calendar_status.json").then(res => res.json()).then(cs => {
+      calendarStatus = cs;
+      const dateSelect = document.getElementById("order-date");
+      const today = new Date();
+      for (let i = 0; i < 30; i++) {
+        const d = new Date(today);
+        d.setDate(today.getDate() + i);
+        const yyyy = d.getFullYear();
+        const mm = String(d.getMonth() + 1).padStart(2, '0');
+        const dd = String(d.getDate()).padStart(2, '0');
+        const wday = ['日', '月', '火', '水', '木', '金', '土'][d.getDay()];
+        const wday_en = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][d.getDay()];
+        const val = `${yyyy}-${mm}-${dd}`;
+        const label = currentLang === "ja"
+          ? `${mm}/${dd} (${wday})`
+          : `${mm}/${dd} (${wday_en})`;
+
+        const status = calendarStatus[val] || "normal";
+        let emoji = "";
+        if (status === "holiday") emoji = currentLang === "ja" ? "（休業日）" : " (Closed)";
+        if (status === "premium") emoji = currentLang === "ja" ? " プレミアムデー🍱" : " Premium Day 🍱";
+        if (status === "special") emoji = currentLang === "ja" ? " スペシャルデー🎯" : " Special Day 🎯";
+
+        const opt = document.createElement("option");
+        opt.value = val;
+        opt.textContent = label + emoji;
+        dateSelect.appendChild(opt);
+      }
+    });
+
+    // メニュー
+    fetch("/static/menu_today.json").then(res => res.json()).then(data => {
+      himawariMenu = data.filter(item => item.type === "fixed_menu");
+      izuMenu = data.filter(item => item.type !== "fixed_menu");
+      showMenus();
+      updateMenuEnable();
+    });
+
+    function showMenus() {
+      // 固定
+      const himawariList = document.getElementById("himawari-menu-list");
+      himawariList.innerHTML = (himawariMenu.length ? himawariMenu.map((item, idx) => `
+        <div class="menu-item">
+          <label>
+            <input type="checkbox" name="menu-himawari" value="${item.name}">
+            <b>${currentLang === "ja" ? item.name : (item.name_en || item.name)}</b>
+            ${currentLang === "en" && item.name ? " / " + item.name : ""}
+            (${currentLang === "ja" ? item.price : (item.price_en || item.price)})
+            ${LANGS[currentLang].qty} <input type="number" name="count-himawari-${idx}" value="1" min="1">
+          </label>
+        </div>
+      `).join("") : `<p>${LANGS[currentLang].fixed_none}</p>`);
+
+      // Web取得
+      const izuList = document.getElementById("izu-menu-list");
+      izuList.innerHTML = (izuMenu.length ? izuMenu.map((item, idx) => `
+        <div class="menu-item">
+          <label>
+            <input type="checkbox" name="menu-izu" value="${item.name}">
+            <b>${currentLang === "ja" ? item.name : (item.name_en || item.name)}</b>
+            ${currentLang === "en" && item.name ? " / " + item.name : ""}
+            (${currentLang === "ja" ? item.price : (item.price_en || item.price)})
+            ${LANGS[currentLang].qty} <input type="number" name="count-izu-${idx}" value="1" min="1">
+          </label>
+        </div>
+      `).join("") : `<p>${LANGS[currentLang].web_none}</p>`);
+    }
+
+    // 日付選択でWebメニュー制御
+    document.getElementById("order-date").addEventListener("change", updateMenuEnable);
+
+    function updateMenuEnable() {
+      const selectedDate = document.getElementById("order-date").value;
+      const status = calendarStatus[selectedDate] || "normal";
+      const izuSection = document.getElementById("izu-menu-list");
+      const izuNotice = document.getElementById("izu-menu-notice");
+      const izuChecks = izuSection.querySelectorAll("input[type='checkbox']");
+      const izuCounts = izuSection.querySelectorAll("input[type='number']");
+
+      if (status === "holiday") {
+        izuChecks.forEach(chk => { chk.disabled = true; chk.checked = false; chk.parentElement.classList.add("disabled"); });
+        izuCounts.forEach(cnt => { cnt.disabled = true; });
+        izuNotice.innerHTML = `<div class='notice'>${LANGS[currentLang].holiday_notice}</div>`;
+      } else {
+        izuChecks.forEach(chk => { chk.disabled = false; chk.parentElement.classList.remove("disabled"); });
+        izuCounts.forEach(cnt => { cnt.disabled = false; });
+        izuNotice.innerHTML = "";
+      }
+    }
+
+    // 注文送信
+    document.getElementById("order-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const name = document.getElementById("user-name").value;
+      const orderDate = document.getElementById("order-date").value;
+      const status = calendarStatus[orderDate] || "normal";
+      let orders = [];
+      document.querySelectorAll("input[type='checkbox']:checked").forEach(box => {
+        if (status === "holiday" && !box.name.startsWith("menu-himawari")) return;
+        const numberInput = box.parentElement.querySelector("input[type='number']");
+        const quantity = numberInput ? numberInput.value || 1 : 1;
+        orders.push({ name: box.value, count: quantity });
+      });
+
+      if (orders.length === 0) {
+        alert(status === "holiday"
+          ? LANGS[currentLang].select_fixed
+          : LANGS[currentLang].select_menu);
+        return;
+      }
+
+      const res = await fetch("/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name,
+          order_date: orderDate,
+          orders: orders
+        })
+      });
+
+      const result = await res.json();
+      if (result.status === "ok") {
+        alert(LANGS[currentLang].order_success);
+        document.getElementById("order-form").reset();
+        updateMenuEnable();
+      } else {
+        alert(LANGS[currentLang].order_fail + result.msg); // 失敗理由がそのまま注文者へ表示される
+      }
+    });
+
+    // ページ読込後に日本語で初期化
+    window.onload = function () {
+      setLang("ja");
+    };
+  </script>
+</body>
+</html>

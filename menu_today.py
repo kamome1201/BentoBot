@@ -118,9 +118,18 @@ try:
         except Exception as e:
             print("❌ バックアップページアクセス失敗:", e)
 
+    # 固定メニューの読み込み
+    fixed_menu_path = "static/fixed_menu.json"
+    if os.path.exists(fixed_menu_path):
+        with open(fixed_menu_path, "r", encoding="utf-8") as f:
+            for item in json.load(f):
+                item["type"] = "fixed_menu"
+                item["date"] = today_str
+                menu_list.append(item)
+
     # 保存
-    os.makedirs("docs", exist_ok=True)
-    with open("docs/menu_today.json", "w", encoding="utf-8") as f:
+    os.makedirs("static", exist_ok=True)
+    with open("static/menu_today.json", "w", encoding="utf-8") as f:
         json.dump(menu_list, f, ensure_ascii=False, indent=2)
     print("✅ menu_today.json を保存しました（件数:", len(menu_list), "）")
 

@@ -2,3 +2,7 @@ selenium
 pandas
 requests
 python-dotenv
+conda-forge::googletrans
+deep-translator
+chromium-browser
+chromium-chromedriver

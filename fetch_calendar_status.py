@@ -80,9 +80,9 @@ try:
             continue
 
     # 書き出し先ディレクトリ作成
-    os.makedirs("docs", exist_ok=True)
+    os.makedirs("static", exist_ok=True)
 
-    with open("docs/calendar_status.json", "w", encoding="utf-8") as f:
+    with open("static/calendar_status.json", "w", encoding="utf-8") as f:
         json.dump(status_map, f, ensure_ascii=False, indent=2)
 
     print(f"✅ calendar_status.json を保存しました（{len(status_map)} 件）")
